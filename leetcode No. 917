@@ -1,0 +1,17 @@
+string reverseOnlyLetters(string s) {
+    int left = 0, right = s.length() - 1;
+    
+    while (left < right) {
+        if (!isalpha(s[left])) {  // Skip non-alphabetic characters
+            left++;
+        } else if (!isalpha(s[right])) {  // Skip non-alphabetic characters
+            right--;
+        } else {
+            swap(s[left], s[right]);  // Swap letters
+            left++;
+            right--;
+        }
+    }
+    
+    return s;
+}
