@@ -1,0 +1,31 @@
+class Solution {
+public:
+    // Expands around a given center and returns the longest palindrome substring
+    string expandAroundCenter(string &s, int left, int right) {
+        while (left >= 0 && right < s.size() && s[left] == s[right]) {
+            left--;  // Move left pointer leftward
+            right++; // Move right pointer rightward
+        }
+        // Extract the palindrome found (left+1 to right-1)
+        return s.substr(left + 1, right - left - 1);
+    }
+
+    // Main function to find the longest palindromic substring
+    string longestPalindrome(string s) {
+        if (s.empty()) return ""; // Edge case: empty string
+
+        string longest = "";
+        for (int i = 0; i < s.size(); i++) {
+            // Check for odd-length palindrome
+            string odd = expandAroundCenter(s, i, i);
+            // Check for even-length palindrome
+            string even = expandAroundCenter(s, i, i + 1);
+
+            // Update the longest palindrome found
+            if (odd.size() > longest.size()) longest = odd;
+            if (even.size() > longest.size()) longest = even;
+        }
+
+        return longest; // Return the longest palindrome found
+    }
+};
